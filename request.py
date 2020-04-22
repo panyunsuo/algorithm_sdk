@@ -42,7 +42,7 @@ class Request(object):
         resp = self._request(url, data, 'POST', headers, timeout)
         return Response(resp)
 
-    def get(self, url, params, headers=None, timeout=5):
+    def get(self, url, params=None, headers=None, timeout=5):
         resp = self._request(url, params, 'GET', headers, timeout)
         return Response(resp)
 

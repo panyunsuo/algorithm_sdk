@@ -53,4 +53,4 @@ from .wedding_photo import WeddingPhoto
 
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
-    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize)
+    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto)

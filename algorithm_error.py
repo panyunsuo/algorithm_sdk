@@ -22,83 +22,6 @@ class UnknownType(Exception):
         super().__init__(error)
 
 
-class AbnormalAlgorithmPlatform(object):
-    class IncorrectAccountPassword(Exception):
-        def __init__(self, *args):
-            """
-            账号密码错误
-            :param args:异常信息
-            """
-            error = log('账号或密码错误', args=args)
-            super().__init__(error)
-
-    class InsufficientAccountPermissions(Exception):
-        def __init__(self, *args):
-            """
-            账号权限不足
-            :param args:异常信息
-            """
-            error = log('账号权限不足', args=args)
-            super().__init__(error)
-
-    class MissingParameters(Exception):
-        def __init__(self, *args):
-            """
-            缺少参数
-            :param args:异常信息
-            """
-            error = log('缺少参数', args=args)
-            super().__init__(error)
-
-    class AbnormalProduction(Exception):
-        def __init__(self, *args):
-            """
-            制作异常
-            :param args:异常信息
-            """
-            error = log('制作异常', args=args)
-            super().__init__(error)
-
-    class ProductionNotCompleted(Exception):
-        def __init__(self, *args):
-            """
-            制作未完成
-            :param args:异常信息
-            """
-            error = log('制作未完成', args=args)
-            super().__init__(error)
-
-    class UnknownFailure(Exception):
-        def __init__(self, *args):
-            """
-            未知异常
-            :param args:异常信息
-            """
-            error = log('未知异常', args=args)
-            super().__init__(error)
-
-    class ServerCrash(Exception):
-        def __init__(self, *args):
-            """
-            服务器崩溃
-            :param args:异常信息
-            """
-            error = log('服务器崩溃', args=args)
-            super().__init__(error)
-
-    @staticmethod
-    def code_filter(code):
-        code_abnormal = {
-            401: AbnormalAlgorithmPlatform.IncorrectAccountPassword,
-            402: AbnormalAlgorithmPlatform.InsufficientAccountPermissions,
-            403: AbnormalAlgorithmPlatform.MissingParameters,
-            501: AbnormalAlgorithmPlatform.ProductionNotCompleted,
-            502: AbnormalAlgorithmPlatform.AbnormalProduction,
-            500: AbnormalAlgorithmPlatform.ServerCrash
-            }
-        return code_abnormal.get(code)
-
-
 class CannotBeConvertedToJSON(Exception):
     def __init__(self, *args):
         """
@@ -117,6 +40,115 @@ class TaskTimeoutNotCompleted(Exception):
         """
         error = log('任务超时未完成', args=args)
         super().__init__(error)
+
+
+class AbnormalAlgorithmPlatform(Exception):
+    """
+    算法平台异常 一般为401 402 403的code只会在开发阶段出现,一旦开发阶段调通后就不会出现该异常
+    """
+    code = 400
+    message = '算法平台异常'
+    _code_abnormal = {}
+
+    def __init__(self, *args):
+        error = log(self.message, args=args)
+        super().__init__(error)
+
+    @classmethod
+    def code_abnormal(cls):
+        if not cls._code_abnormal:
+            for sc in cls.__subclasses__():
+                cls._code_abnormal[sc.code] = sc
+
+        return cls._code_abnormal
+
+    @classmethod
+    def code_filter(cls, code):
+        return cls.code_abnormal().get(code)
+
+
+class IncorrectAccountPassword(AbnormalAlgorithmPlatform):
+    code = 401
+    message = '账号或密码错误'
+
+    def __init__(self, *args):
+        """
+        账号密码错误
+        :param args:异常信息
+        """
+        super().__init__(*args)
+
+
+class InsufficientAccountPermissions(AbnormalAlgorithmPlatform):
+    code = 402
+    message = '账号权限不足'
+
+    def __init__(self, *args):
+        """
+        账号权限不足
+        :param args:异常信息
+        """
+        super().__init__(*args)
+
+
+class MissingParameters(AbnormalAlgorithmPlatform):
+    code = 403
+    message = '缺少参数'
+
+    def __init__(self, *args):
+        """
+        缺少参数
+        :param args:异常信息
+        """
+        super().__init__(*args)
+
+
+class AbnormalProduction(AbnormalAlgorithmPlatform):
+    code = 502
+    message = '制作异常'
+
+    def __init__(self, *args):
+        """
+        制作异常
+        :param args:异常信息
+        """
+        super().__init__(*args)
+
+
+class ProductionNotCompleted(AbnormalAlgorithmPlatform):
+    code = 501
+    message = '制作未完成'
+
+    def __init__(self, *args):
+        """
+        制作未完成
+        :param args:异常信息
+        """
+        super().__init__(*args)
+
+
+class UnknownFailure(AbnormalAlgorithmPlatform):
+    code = 0
+    message = '未知异常'
+
+    def __init__(self, *args):
+        """
+        未知异常
+        :param args:异常信息
+        """
+        super().__init__(*args)
+
+
+class ServerCrash(AbnormalAlgorithmPlatform):
+    code = 500
+    message = '服务器崩溃'
+
+    def __init__(self, *args):
+        """
+        服务器崩溃
+        :param args:异常信息
+        """
+        super().__init__(*args)
 #
 # class AbnormalProduction(Exception):
 #     def __init__(self, *args):

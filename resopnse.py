@@ -116,6 +116,14 @@ class Response(object):
         return self.json.get('error')
 
     @property
+    def code(self):
+        """
+        算法本身的异常信息
+        :return: str
+        """
+        return self.json.get('code')
+
+    @property
     def message(self):
         """
         算法本身的异常信息,可能为None
@@ -133,4 +141,4 @@ class Response(object):
             raise e(self.resp.text)
 
         if self.allot_code != 200:
-            raise algorithm_error.AbnormalAlgorithmPlatform.UnknownFailure(self.resp.text)
+            raise algorithm_error.UnknownFailure(self.resp.text)

@@ -13,7 +13,7 @@ from urllib.parse import urljoin
 
 from PIL import Image
 
-from .algorithm_error import AbnormalAlgorithmPlatform, TaskTimeoutNotCompleted, UnknownType
+from .algorithm_error import TaskTimeoutNotCompleted, UnknownType
 from .auth import AuthInfo
 from .request import request
 
@@ -116,11 +116,6 @@ class Base(object):
         """
         url = self.api_task_id.format(task_id=task_id)
         resp = request.get(url, params={})
-        try:
-            resp.verify()
-        except AbnormalAlgorithmPlatform.ProductionNotCompleted:
-            return False
-
         return resp
 
     @property
