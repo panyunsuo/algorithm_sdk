@@ -23,7 +23,7 @@
 ```python
 from algorithm_sdk import algorithm_error, AuthInfo, Base, WeddingPhoto
 
-auth_info = AuthInfo(host='http://internet.algo.leqi.us:8000', username='pan', password='rongsuo', intranet=False)
+auth_info = AuthInfo(host='http://algo.leqi.us', username='your name', password='your password', intranet=True)
 # 本地图片路径
 filename = 'src/1.jpg'
 
