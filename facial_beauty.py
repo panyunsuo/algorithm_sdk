@@ -13,7 +13,7 @@ class FacialBeauty(AlgoBase):
     __algo_name__ = 'facial_beauty'
 
     def __init__(self, auth_info, file, beauty_level, process=None, refer_images=None, ppi=300, need_cache=True,
-                 img_format='PNG', use_mask=False):
+                 img_format='PNG', use_mask=False, **kwargs):
         """
         精修美颜
         :param auth_info:验证参数
@@ -35,3 +35,4 @@ class FacialBeauty(AlgoBase):
         self.request['need_cache'] = need_cache
         self.request['img_format'] = img_format
         self.request['use_mask'] = use_mask
+        self.request.update(kwargs)

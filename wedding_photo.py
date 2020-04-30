@@ -13,7 +13,7 @@ class WeddingPhoto(AlgoBase):
     __algo_name__ = 'wedding_photo'
 
     def __init__(self, auth_info, file, img_size=None, process=None, fair_level_right=None, fair_level_left=None,
-                 need_beauty_buffer=False, use_cache=True):
+                 need_beauty_buffer=False, use_cache=True, **kwargs):
         """
         结婚照算法
         :param auth_info:验证参数
@@ -33,3 +33,4 @@ class WeddingPhoto(AlgoBase):
         self.request['fair_level_left'] = fair_level_left
         self.request['need_beauty_buffer'] = need_beauty_buffer
         self.request['use_cache'] = use_cache
+        self.request.update(kwargs)

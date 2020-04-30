@@ -12,7 +12,7 @@ from .base import AlgoBase
 class CheckPhoto(AlgoBase):
     __algo_name__ = 'check_photo'
 
-    def __init__(self, auth_info, file, process=None, specRule=None):
+    def __init__(self, auth_info, file, process=None, specRule=None, **kwargs):
         """
         合规检测算法
         :param auth_info: 验证参数
@@ -24,3 +24,4 @@ class CheckPhoto(AlgoBase):
         self.request['file'] = self.file_auto_process(file, has_none=False)
         self.request['process'] = process
         self.request['specRule'] = specRule
+        self.request.update(kwargs)
