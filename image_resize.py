@@ -12,7 +12,7 @@ from .base import AlgoBase
 class ImageResize(AlgoBase):
     __algo_name__ = 'image_resize'
 
-    def __init__(self, auth_info, file, process=None, sharp=True, mode=0, img_format='JPEG'):
+    def __init__(self, auth_info, file, process=None, sharp=True, mode=0, img_format='JPEG', **kwargs):
         """
         图片缩放
         :param auth_info:验证参数
@@ -28,3 +28,4 @@ class ImageResize(AlgoBase):
         self.request['sharp'] = sharp
         self.request['mode'] = mode
         self.request['img_format'] = img_format
+        self.request.update(kwargs)

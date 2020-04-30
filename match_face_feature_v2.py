@@ -13,7 +13,7 @@ class MatchFaceFeatureV2(AlgoBase):
     __algo_name__ = 'match_face_feature_v2'
 
     def __init__(self, auth_info, target_features, filter_features_file=None, filter_features_list=None,
-                 reference_similarity=None):
+                 reference_similarity=None, **kwargs):
         """
         人脸特征匹配
         :param auth_info:验证参数
@@ -27,3 +27,4 @@ class MatchFaceFeatureV2(AlgoBase):
         self.request['filter_features_file'] = self.file_auto_process(filter_features_file, has_none=True)
         self.request['filter_features_list'] = filter_features_list
         self.request['reference_similarity'] = reference_similarity
+        self.request.update(kwargs)

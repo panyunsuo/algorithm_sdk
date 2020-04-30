@@ -15,7 +15,7 @@ class CutPhoto(AlgoBase):
 
     def __init__(self, auth_info, file, specRule, ratios, img_size, background_color, process=None, ppi=300,
                  fair_level=None, img_format='PNG', is_check=False, file_size_section=None, need_mask_image=False,
-                 need_fair=True, background_image_keys=None
+                 need_fair=True, background_image_keys=None, **kwargs
                  ):
         """
         证件照制作(旧)
@@ -50,3 +50,4 @@ class CutPhoto(AlgoBase):
         self.request['need_mask_image'] = need_mask_image
         self.request['need_fair'] = need_fair
         self.request['background_image_keys'] = background_image_keys
+        self.request.update(kwargs)

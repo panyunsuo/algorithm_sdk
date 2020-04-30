@@ -1,4 +1,3 @@
-
 """
 @File    :   auth_info.py
 @Contact :   panrs@venpoo.com
@@ -7,6 +6,8 @@
 ------------
 2020/4/21 10:47
 """
+
+
 class AuthInfo(object):
 
     def __init__(self, host, username, password, intranet=True, need_cache=True):
