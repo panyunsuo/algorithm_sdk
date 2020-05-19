@@ -39,7 +39,7 @@ print(resp.json)
 """
 from . import algorithm_error
 from .auth import AuthInfo
-from .base import AlgoBase, Base
+from .base import AlgoBase, Base, ExecutableFunction
 from .bg_cut_photo import BgCutPhoto
 from .check_photo import CheckPhoto
 from .cut_photo import CutPhoto
@@ -51,6 +51,8 @@ from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .wedding_photo import WeddingPhoto
 
+__version__ = '1.0.2'
+
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
-    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto)
+    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction)
