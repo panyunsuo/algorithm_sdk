@@ -14,7 +14,8 @@ class CutoutAndBeauty(AlgoBase):
     __algo_name__ = 'cutout_and_beauty'
 
     def __init__(self, auth_info, file, facial_data, process=None, fair_level=None, img_size=None, clothes_keys=None,
-                 need_resize=True, save_pack_data=False, use_thumbnail_cutout=True, torso_ratio=1, **kwargs):
+                 need_resize=True, save_pack_data=False, use_thumbnail_cutout=True, torso_ratio=1,
+                 has_full_body_dress_up=False, **kwargs):
         """
         带换装功能的抠图美颜算法
         :param auth_info:验证参数
@@ -40,4 +41,5 @@ class CutoutAndBeauty(AlgoBase):
         self.request['save_pack_data'] = save_pack_data
         self.request['use_thumbnail_cutout'] = use_thumbnail_cutout
         self.request['torso_ratio'] = torso_ratio
+        self.request['has_full_body_dress_up'] = has_full_body_dress_up
         self.request.update(kwargs)

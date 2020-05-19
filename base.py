@@ -26,6 +26,30 @@ def get_md5(data):
     return hash_code
 
 
+class ExecutableFunction(object):
+
+    def __init__(self, function, oss_name):
+        """
+        当文件在第三方平台存储时,为了使只有在需要时才下载该文件,可以初始化此类
+        :param function:文件在下载函数,需要保证执行function()后会返回文件二进制数据
+        :param oss_name:指定该文件在oss上的存储名称,当此文件名不存在时,将会调用function函数并上传该文件
+
+
+        调用示例:
+        def function(filename):
+            # 当函数与特定的文件名相关时,这里需要使用闭包
+            def f():
+                return open(filename, 'rb').read()
+            return f
+
+        executable_function = ExecutableFunction(function =function('1.jpg'), oss_name='1.jpg')
+
+        """
+        self.function = function
+        assert callable(self.function), Exception('function不是可执行对象')
+        self.oss_name = oss_name
+
+
 class Base(object):
     """
     基础库,封装了一些基础的函数,例如图片上传 下载 生成预览url 根据任务ID获取结果等,可以单独初始化此库来使用上述功能
@@ -76,6 +100,8 @@ class Base(object):
         put_url, exist_file, oss_name = self._get_put_url(oss_name, intranet)
 
         if not exist_file or cover:
+            if callable(file_bytes):
+                file_bytes = file_bytes()
             resp = request.put(put_url, data=file_bytes, timeout=10)
             resp.verify()
 
@@ -222,7 +248,7 @@ class AlgoBase(Base):
     def file_auto_process(self, file, has_none=None):
         """
         文件自动处理,若传入的
-        :param file:文件,可以是str:oss文件名 bytes:原图字节文件 PIL.Image.Image:PIL图片对象
+        :param file:文件,可以是str:oss文件名 bytes:原图字节文件 PIL.Image.Image:PIL图片对象 ExecutableFunction对象
         :param has_none:是否可以为None
         :return:str:oss文件名
         """
@@ -236,5 +262,7 @@ class AlgoBase(Base):
             buffer = io.BytesIO()
             file.save(buffer, format='PNG')
             return self.send_file(buffer.getvalue())
+        elif isinstance(file, ExecutableFunction):
+            return self.send_file(file_bytes=file.function, oss_name=file.oss_name)
         else:
             raise UnknownType(file, type(file))
