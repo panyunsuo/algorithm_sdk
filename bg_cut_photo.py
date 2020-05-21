@@ -19,7 +19,7 @@ class BgCutPhoto(AlgoBase):
         """
         原图换背景(建议用全身照算法)
         :param auth_info: 验证参数
-        :param file: 图片文件 可以是str:oss文件名 bytes:原图字节文件 PIL.Image.Image:PIL图片对象
+        :param file: 图片文件 可以是str:oss文件名 bytes:原图字节文件 PIL.Image.Image:PIL图片对象  algorithm.ExecutableFunction对象
         :param background_color: 背景颜色
         :param process: 原图缩放参数
         :param ppi: ppi
