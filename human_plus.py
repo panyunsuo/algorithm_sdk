@@ -18,7 +18,7 @@ class HumanPlus(AlgoBase):
         """
         全身照/形象照算法
         :param auth_info:验证参数
-        :param file: 图片文件 可以是str:oss文件名 bytes:原图字节文件 PIL.Image.Image:PIL图片对象
+        :param file: 图片文件 可以是str:oss文件名 bytes:原图字节文件 PIL.Image.Image:PIL图片对象  algorithm.ExecutableFunction对象
         :param process: 原图缩放参数
         :param cut_params: 裁剪参数
         :param need_to_use_cache: 是否使用缓存

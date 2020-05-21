@@ -20,7 +20,7 @@ class CutPhoto(AlgoBase):
         """
         证件照制作(旧)
         :param auth_info: 验证信息
-        :param file: 图片文件 可以是str:oss文件名 bytes:原图字节文件 PIL.Image.Image:PIL图片对象
+        :param file: 图片文件 可以是str:oss文件名 bytes:原图字节文件 PIL.Image.Image:PIL图片对象  algorithm.ExecutableFunction对象
         :param specRule: 检测参数
         :param ratios: 裁剪参数
         :param img_size: 结果图缩放参数
