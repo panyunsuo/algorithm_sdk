@@ -62,22 +62,13 @@ class Base(object):
         self._password = auth_info.password
 
     def _get_put_url(self, oss_name, intranet):
-        allot_data = {
-            'user': self._username,
-            'pwd': self._password,
-            'filename': oss_name,
-            'intranet': intranet
-            }
+        allot_data = {'user': self._username, 'pwd': self._password, 'filename': oss_name, 'intranet': intranet}
         resp = request.post(self.api_send_oss_url, data=allot_data)
         resp.verify()
         return resp.json['put_url'], resp.json.get('exist_file'), resp.json['oss_name']
 
     def _get_file_url(self, oss_name, intranet, watermark):
-        params = {
-            'filename': oss_name,
-            'intranet': intranet,
-            'watermark': watermark
-            }
+        params = {'filename': oss_name, 'intranet': intranet, 'watermark': watermark}
         resp = request.get(self.api_get_oss_url, params=params)
         resp.verify()
         return resp.json['preview_url']
@@ -207,13 +198,11 @@ class AlgoBase(Base):
         生成算法请求的json参数
         :return: dict
         """
-        return {
-            'user': self._username,
-            'pwd': self._password,
-            'target': self.algo_name,
-            'need_cache': self.need_cache,
-            'request': self.request
-            }
+        return {'user': self._username,
+                'pwd': self._password,
+                'target': self.algo_name,
+                'need_cache': self.need_cache,
+                'request': self.request}
 
     def synchronous_request(self, timeout=30, interval=0.5):
         """

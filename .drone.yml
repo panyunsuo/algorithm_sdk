@@ -1,0 +1,24 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: flake8
+    image: venpoo/python-ci-base:3.5
+    commands:
+      - flake8
+    depends_on:
+      - clone
+
+  - name: pylint
+    image: venpoo/python-ci-base:3.5
+    commands:
+      - git diff --name-only origin/$DRONE_TARGET_BRANCH $DRONE_COMMIT_SHA | grep -E '\.py$' | xargs pylint
+    depends_on:
+      - clone
+
+trigger:
+  branch:
+    - master
+  event:
+    - pull_request
