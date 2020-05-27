@@ -198,13 +198,11 @@ class AlgoBase(Base):
         生成算法请求的json参数
         :return: dict
         """
-        return {
-            'user': self._username,
-            'pwd': self._password,
-            'target': self.algo_name,
-            'need_cache': self.need_cache,
-            'request': self.request
-            }
+        return {'user': self._username,
+                'pwd': self._password,
+                'target': self.algo_name,
+                'need_cache': self.need_cache,
+                'request': self.request}
 
     def synchronous_request(self, timeout=30, interval=0.5):
         """
