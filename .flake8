@@ -1,0 +1,10 @@
+[flake8]
+ignore =
+	# line break
+	W503, W504,
+	# long lines
+	E501,
+	# import not at head
+	E402
+per-file-ignores =
+	__init__.py: F401

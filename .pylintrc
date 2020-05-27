@@ -1,0 +1,18 @@
+[MESSAGES CONTROL]
+
+disable=all
+
+enable=using-constant-test,
+       singleton-comparison,
+       reimported,
+       logging-too-few-args,
+       logging-too-many-args,
+       simplify-boolean-expression,
+       consider-using-in,
+       consider-merging-isinstance,
+       consider-using-dict-comprehension,
+       consider-using-set-comprehension,
+       len-as-condition,
+       unneeded-not,
+       simplifiable-if-expression,
+       simplifiable-if-statement
