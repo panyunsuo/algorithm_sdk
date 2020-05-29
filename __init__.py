@@ -13,6 +13,7 @@
     base 基础类库模块
         -base.Base 主要是对图片算法的处理,可以上传/下载图片, 获取算法结果等,详细使用见模块说明
         -base.AlgoBase 对Base模块的封装,主要是有同步/异步发布算法的功能
+        -bass.ExecutableFunction 使用函数作为图片的参数,当图片不存在时再执行该函数获取图片数据
     bg_cut_photo 换背景算法
     check_photo 合规检测
     cut_photo 证件照制作(不带缓存)
@@ -41,6 +42,7 @@ from . import algorithm_error
 from .auth import AuthInfo
 from .base import AlgoBase, Base, ExecutableFunction
 from .bg_cut_photo import BgCutPhoto
+from .card import Card
 from .check_photo import CheckPhoto
 from .cut_photo import CutPhoto
 from .cutout_and_beauty import CutoutAndBeauty
@@ -51,8 +53,8 @@ from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .wedding_photo import WeddingPhoto
 
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
-    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction)
+    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card)
