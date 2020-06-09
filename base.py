@@ -61,14 +61,15 @@ class Base(object):
         self._intranet = auth_info.intranet
         self._password = auth_info.password
 
-    def _get_put_url(self, oss_name, intranet):
-        allot_data = {'user': self._username, 'pwd': self._password, 'filename': oss_name, 'intranet': intranet}
+    def _get_put_url(self, oss_name, intranet, ssl):
+        allot_data = {'user': self._username, 'pwd': self._password, 'filename': oss_name, 'intranet': intranet,
+                      'ssl_url': ssl}
         resp = request.post(self.api_send_oss_url, data=allot_data)
         resp.verify()
         return resp.json['put_url'], resp.json.get('exist_file'), resp.json['oss_name']
 
-    def _get_file_url(self, oss_name, intranet, watermark):
-        params = {'filename': oss_name, 'intranet': intranet, 'watermark': watermark}
+    def _get_file_url(self, oss_name, intranet, watermark, ssl):
+        params = {'filename': oss_name, 'intranet': intranet, 'watermark': watermark, 'ssl_url': ssl}
         resp = request.get(self.api_get_oss_url, params=params)
         resp.verify()
         return resp.json['preview_url']
@@ -88,7 +89,7 @@ class Base(object):
         if not oss_name:
             oss_name = get_md5(file_bytes)
 
-        put_url, exist_file, oss_name = self._get_put_url(oss_name, intranet)
+        put_url, exist_file, oss_name = self._get_put_url(oss_name, intranet, False)
 
         if not exist_file or cover:
             if callable(file_bytes):
@@ -107,22 +108,23 @@ class Base(object):
         """
         if intranet is None:
             intranet = self._intranet
-        get_url = self._get_file_url(oss_name, intranet, watermark=None)
+        get_url = self._get_file_url(oss_name, intranet, watermark=None, ssl=False)
         resp = request.get(get_url, timeout=10)
         resp.verify()
         return resp.content
 
-    def get_file_url(self, oss_name, intranet=False, watermark=None):
+    def get_file_url(self, oss_name, intranet=False, watermark=None, ssl=False):
         """
         生成文件的预览地址
         :param oss_name: 文件在阿里云oss上的名称
         :param intranet: 是否使用内网传输, 为None时将使用auth_info中的参数
         :param watermark: 图片水印
+        :param ssl: 是否需要https的url
         :return: url
         """
         if intranet is None:
             intranet = self._intranet
-        get_url = self._get_file_url(oss_name, intranet, watermark)
+        get_url = self._get_file_url(oss_name, intranet, watermark, ssl)
         return get_url
 
     def get_results(self, task_id):
@@ -241,8 +243,11 @@ class AlgoBase(Base):
         :param has_none:是否可以为None
         :return:str:oss文件名
         """
-        if not file and has_none:
-            raise TypeError('参数不得为空')
+        if not file:
+            if has_none:
+                return None
+            else:
+                raise TypeError('参数不得为空')
         if isinstance(file, str):
             return file
         elif isinstance(file, bytes):
