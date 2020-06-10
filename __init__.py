@@ -53,7 +53,7 @@ from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .wedding_photo import WeddingPhoto
 
-__version__ = '1.0.4'
+__version__ = '1.0.5'
 
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,

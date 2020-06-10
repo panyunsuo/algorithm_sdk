@@ -38,7 +38,7 @@ class CutoutAndBeauty(AlgoBase):
         self.request['facial_data'] = facial_data
         self.request['fair_level'] = fair_level
         self.request['img_size'] = img_size
-        self.request['clothes_keys'] = [self.file_auto_process(file) for file in clothes_keys]
+        self.request['clothes_keys'] = [self.file_auto_process(file, has_none=True) for file in clothes_keys]
         self.request['need_resize'] = need_resize
         self.request['save_pack_data'] = save_pack_data
         self.request['use_thumbnail_cutout'] = use_thumbnail_cutout
