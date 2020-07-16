@@ -1,7 +1,7 @@
-**安装**  
+# 安装  
 `python3 setup.py install`
 
-** 算法模块 **
+# 算法模块
 
 * `algorithm_error` 异常模块  
 * * `algorithm_error.AbnormalAlgorithmPlatform` API网关相关异常  
@@ -20,7 +20,7 @@
 * `MatchFaceFeatureV2` 人脸特征匹配
 * `ImageResize` 结婚照算法
 
-** 使用示例: **
+# 使用示例: 
 > 结婚照
 
 ```python
