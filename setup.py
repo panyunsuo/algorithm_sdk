@@ -21,5 +21,5 @@ setup(
     packages=find_packages(where='.', exclude=(), include=('*',)),
     include_package_data=True,
     platforms="any",
-    install_requires=['requests==2.13.0']
+    install_requires=['requests']
     )
