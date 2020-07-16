@@ -6,6 +6,8 @@
 ------------
 2020/4/21 9:03
 """
+import logging
+
 from .base import AlgoBase
 
 
@@ -13,7 +15,7 @@ class WeddingPhoto(AlgoBase):
     __algo_name__ = 'wedding_photo'
 
     def __init__(self, auth_info, file, img_size=None, process=None, fair_level_right=None, fair_level_left=None,
-                 need_beauty_buffer=False, use_cache=True, **kwargs):
+                 need_beauty_buffer=False, use_cache=True, beauty_level_right=None, beauty_level_left=None, **kwargs):
         """
         结婚照算法
         :param auth_info:验证参数
@@ -24,6 +26,8 @@ class WeddingPhoto(AlgoBase):
         :param fair_level_left:左脸美颜参数
         :param need_beauty_buffer: 是否需要美颜buffer(用于本地美颜)
         :param use_cache: 是否需要使用缓存
+        :param beauty_level_right: 新的右脸美颜参数
+        :param beauty_level_left: 新的左脸美颜参数
         """
         super().__init__(auth_info, self.__algo_name__)
         self.request['file'] = self.file_auto_process(file)
@@ -31,6 +35,10 @@ class WeddingPhoto(AlgoBase):
         self.request['process'] = process
         self.request['fair_level_right'] = fair_level_right
         self.request['fair_level_left'] = fair_level_left
+        self.request['beauty_level_right'] = beauty_level_right
+        self.request['beauty_level_left'] = beauty_level_left
         self.request['need_beauty_buffer'] = need_beauty_buffer
         self.request['use_cache'] = use_cache
+        if fair_level_right or fair_level_left:
+            logging.warning('fair_level_right 参数和 fair_level_left 参数建议用beauty_level_right参数和beauty_level_left替换')
         self.request.update(kwargs)
