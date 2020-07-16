@@ -8,7 +8,10 @@
 """
 import hashlib
 import io
+import logging
 import time
+import uuid
+from functools import lru_cache
 from urllib.parse import urljoin
 
 from PIL import Image
@@ -60,7 +63,9 @@ class Base(object):
         self._username = auth_info.username
         self._intranet = auth_info.intranet
         self._password = auth_info.password
+        self._auth_info = auth_info
 
+    @lru_cache(maxsize=100)
     def _get_put_url(self, oss_name, intranet, ssl):
         allot_data = {'user': self._username, 'pwd': self._password, 'filename': oss_name, 'intranet': intranet,
                       'ssl_url': ssl}
@@ -68,6 +73,7 @@ class Base(object):
         resp.verify()
         return resp.json['put_url'], resp.json.get('exist_file'), resp.json['oss_name']
 
+    @lru_cache(maxsize=100)
     def _get_file_url(self, oss_name, intranet, watermark, ssl):
         params = {'filename': oss_name, 'intranet': intranet, 'watermark': watermark, 'ssl_url': ssl}
         resp = request.get(self.api_get_oss_url, params=params)
@@ -87,7 +93,10 @@ class Base(object):
             intranet = self._intranet
 
         if not oss_name:
-            oss_name = get_md5(file_bytes)
+            if self._auth_info.random_name:
+                oss_name = str(uuid.uuid1())
+            else:
+                oss_name = get_md5(file_bytes)
 
         put_url, exist_file, oss_name = self._get_put_url(oss_name, intranet, False)
 
@@ -113,6 +122,7 @@ class Base(object):
         resp.verify()
         return resp.content
 
+    @lru_cache(maxsize=100)
     def get_file_url(self, oss_name, intranet=False, watermark=None, ssl=False):
         """
         生成文件的预览地址
@@ -138,6 +148,7 @@ class Base(object):
         return resp
 
     @property
+    @lru_cache(maxsize=1)
     def api_send_oss_url(self):
         """
         网关平台上传文件的url
@@ -147,6 +158,7 @@ class Base(object):
         return urljoin(self._host, api)
 
     @property
+    @lru_cache(maxsize=1)
     def api_get_oss_url(self):
         """
         网关平台获取文件的url
@@ -156,6 +168,7 @@ class Base(object):
         return urljoin(self._host, api)
 
     @property
+    @lru_cache(maxsize=1)
     def api_sync_url(self):
         """
         网关平台同步请求算法的url
@@ -165,6 +178,7 @@ class Base(object):
         return urljoin(self._host, api)
 
     @property
+    @lru_cache(maxsize=1)
     def api_async_url(self):
         """
         网关平台异步请求算法的url
@@ -174,6 +188,7 @@ class Base(object):
         return urljoin(self._host, api)
 
     @property
+    @lru_cache(maxsize=1)
     def api_task_id(self):
         """
         网关平台获取任务结果的url
@@ -217,7 +232,11 @@ class AlgoBase(Base):
         # 发布任务
         task_id = self.asynchronous_request().task_id
         while time.time() < stop_time:
-            response = self.get_results(task_id)
+            try:
+                response = self.get_results(task_id)
+            except Exception:
+                logging.exception('同步请求算法 获取结果异常 重试')
+                response = None
             if response:
                 if response.allot_code == 200:
                     return response

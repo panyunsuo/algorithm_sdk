@@ -30,7 +30,7 @@
 
 from algorithm_sdk import AuthInfo, WeddingPhoto
 
-auth_info = AuthInfo(host='http://ialgo.leqi.us', username='your name', password='your password', intranet=True)
+auth_info = AuthInfo(host='http://algo.leqi.us', username='your name', password='your password', intranet=True)
 filename = 'src/1.jpg' # 本地图片路径
 
 wedding_photo = WeddingPhoto(auth_info=auth_info, file=open(filename, 'rb').read())
@@ -53,7 +53,7 @@ from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .wedding_photo import WeddingPhoto
 
-__version__ = '1.0.5'
+__version__ = '1.0.6'
 
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
