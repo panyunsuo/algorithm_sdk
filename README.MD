@@ -1,3 +1,6 @@
+**安装**  
+`python3 setup.py install`
+
 ** 算法模块 **
 
 * `algorithm_error` 异常模块  
