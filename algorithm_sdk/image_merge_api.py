@@ -27,7 +27,7 @@ class ImageMergeApi(AlgoBase):
         """
         super().__init__(auth_info, self.__algo_name__)
         self.request['fore_file'] = self.file_auto_process(fore_file, has_none=False)
-        self.request['mask_file'] = self.file_auto_process(mask_file, has_none=False)
+        self.request['mask_file'] = self.file_auto_process(mask_file, has_none=True)
         self.request['back_file'] = self.file_auto_process(back_file, has_none=False)
         self.request['process'] = process
         self.request.update(kwargs)
