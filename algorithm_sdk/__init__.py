@@ -51,6 +51,7 @@ from .extract_face_feature_v2 import ExtractFaceFeatureV2
 from .facial_beauty import FacialBeauty
 from .human_plus import HumanPlus
 from .image_handle import ImageHandle
+from .image_merge_api import ImageMergeApi
 from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .wedding_photo import WeddingPhoto
@@ -60,4 +61,4 @@ __version__ = '1.0.6'
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
     FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card,
-    ImageHandle)
+    ImageHandle, ImageMergeApi)
