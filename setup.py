@@ -12,7 +12,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="algorithm_sdk",
-    version="1.0.7",
+    version="1.1.0",
     description="idphoto",
     long_description="algorithm sdk",
     license="MIT Licence",

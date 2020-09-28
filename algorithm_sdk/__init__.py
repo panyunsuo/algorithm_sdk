@@ -24,6 +24,7 @@
     image_resize 图片缩放
     match_face_feature_v2 人脸特征匹配
     wedding_photo 结婚照算法
+    image_handle 图片处理
 
 使用示例:
 结婚照
@@ -49,6 +50,8 @@ from .cutout_and_beauty import CutoutAndBeauty
 from .extract_face_feature_v2 import ExtractFaceFeatureV2
 from .facial_beauty import FacialBeauty
 from .human_plus import HumanPlus
+from .image_handle import ImageHandle
+from .image_merge_api import ImageMergeApi
 from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .wedding_photo import WeddingPhoto
@@ -58,5 +61,7 @@ __version__ = '1.0.7'
 
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
+    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card,
+    ImageHandle, ImageMergeApi)
     FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card,
     FacialBeautyV2)
