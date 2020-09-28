@@ -49,19 +49,18 @@ from .cut_photo import CutPhoto
 from .cutout_and_beauty import CutoutAndBeauty
 from .extract_face_feature_v2 import ExtractFaceFeatureV2
 from .facial_beauty import FacialBeauty
+from .facial_beauty_v2 import FacialBeautyV2
 from .human_plus import HumanPlus
+from .image_contour_api import ImageContourApi
 from .image_handle import ImageHandle
 from .image_merge_api import ImageMergeApi
 from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .wedding_photo import WeddingPhoto
-from .facial_beauty_v2 import FacialBeautyV2
 
-__version__ = '1.0.7'
+__version__ = '1.0.9'
 
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
     FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card,
-    ImageHandle, ImageMergeApi)
-    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card,
-    FacialBeautyV2)
+    ImageHandle, ImageMergeApi, FacialBeautyV2, ImageContourApi)
