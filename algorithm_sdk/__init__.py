@@ -40,6 +40,7 @@ print(resp.json)
 
 """
 from . import algorithm_error
+from .accounting_examination_review import AccountingExaminationReview
 from .auth import AuthInfo
 from .base import AlgoBase, Base, ExecutableFunction
 from .bg_cut_photo import BgCutPhoto
@@ -63,4 +64,4 @@ __version__ = '1.0.9'
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
     FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card,
-    ImageHandle, ImageMergeApi, FacialBeautyV2, ImageContourApi)
+    ImageHandle, ImageMergeApi, FacialBeautyV2, ImageContourApi, AccountingExaminationReview)
