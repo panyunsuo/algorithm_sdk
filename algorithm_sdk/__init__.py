@@ -24,13 +24,14 @@
     image_resize 图片缩放
     match_face_feature_v2 人脸特征匹配
     wedding_photo 结婚照算法
+    image_handle 图片处理
 
 使用示例:
 结婚照
 
 from algorithm_sdk import AuthInfo, WeddingPhoto
 
-auth_info = AuthInfo(host='http://ialgo.leqi.us', username='your name', password='your password', intranet=True)
+auth_info = AuthInfo(host='http://algo.leqi.us', username='your name', password='your password', intranet=True)
 filename = 'src/1.jpg' # 本地图片路径
 
 wedding_photo = WeddingPhoto(auth_info=auth_info, file=open(filename, 'rb').read())
@@ -39,6 +40,7 @@ print(resp.json)
 
 """
 from . import algorithm_error
+from .accounting_examination_review import AccountingExaminationReview
 from .auth import AuthInfo
 from .base import AlgoBase, Base, ExecutableFunction
 from .bg_cut_photo import BgCutPhoto
@@ -48,13 +50,18 @@ from .cut_photo import CutPhoto
 from .cutout_and_beauty import CutoutAndBeauty
 from .extract_face_feature_v2 import ExtractFaceFeatureV2
 from .facial_beauty import FacialBeauty
+from .facial_beauty_v2 import FacialBeautyV2
 from .human_plus import HumanPlus
+from .image_contour_api import ImageContourApi
+from .image_handle import ImageHandle
+from .image_merge_api import ImageMergeApi
 from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .wedding_photo import WeddingPhoto
 
-__version__ = '1.0.5'
+__version__ = '1.0.9'
 
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
-    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card)
+    FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card,
+    ImageHandle, ImageMergeApi, FacialBeautyV2, ImageContourApi, AccountingExaminationReview)
