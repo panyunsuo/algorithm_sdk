@@ -59,10 +59,12 @@ from .image_resize import ImageResize
 from .match_face_feature_v2 import MatchFaceFeatureV2
 from .original_background_crop import OriginalBackgroundCrop
 from .wedding_photo import WeddingPhoto
+from .idphoto_deep_beauty_to_b import IDPhotoDeepBeautyToB
 
 __version__ = '1.0.9'
 
 __all__ = (
     algorithm_error, AlgoBase, AuthInfo, Base, BgCutPhoto, CheckPhoto, CutPhoto, CutoutAndBeauty, ExtractFaceFeatureV2,
     FacialBeauty, HumanPlus, ImageResize, MatchFaceFeatureV2, ImageResize, WeddingPhoto, ExecutableFunction, Card,
-    ImageHandle, ImageMergeApi, FacialBeautyV2, ImageContourApi, AccountingExaminationReview, OriginalBackgroundCrop)
+    ImageHandle, ImageMergeApi, FacialBeautyV2, ImageContourApi, AccountingExaminationReview, OriginalBackgroundCrop,
+    IDPhotoDeepBeautyToB)
