@@ -60,6 +60,7 @@ from .match_face_feature_v2 import MatchFaceFeatureV2
 from .original_background_crop import OriginalBackgroundCrop
 from .wedding_photo import WeddingPhoto
 from .idphoto_deep_beauty_to_b import IDPhotoDeepBeautyToB
+from .cutout_and_beauty_coordination import CutoutAndBeautyCoordination
 
 __version__ = '1.0.9'
 

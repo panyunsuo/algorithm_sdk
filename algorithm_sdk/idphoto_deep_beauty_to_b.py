@@ -4,7 +4,7 @@ from .base import AlgoBase
 class IDPhotoDeepBeautyToB(AlgoBase):
     __algo_name__ = 'idphoto_deep_beauty_to_b'
 
-    def __init__(self, auth_info, oss_name, process=None, spec_info=None, deep_beauty_template=None, need_resize=True,
+    def __init__(self, auth_info, oss_file, process=None, spec_info=None, deep_beauty_template=None, need_resize=True,
                  **kwargs):
         """
         证件照B端精修美颜
@@ -17,7 +17,7 @@ class IDPhotoDeepBeautyToB(AlgoBase):
         @param kwargs:
         """
         super().__init__(auth_info, self.__algo_name__)
-        self.request['oss_name'] = self.file_auto_process(oss_name, has_none=False)
+        self.request['oss_file'] = self.file_auto_process(oss_file, has_none=False)
         self.request['process'] = process
         self.request['spec_info'] = spec_info
         self.request['deep_beauty_template'] = deep_beauty_template
